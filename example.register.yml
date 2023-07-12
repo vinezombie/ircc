@@ -1,0 +1,40 @@
+# The set of capabilities to request.
+caps: ["away-notify"]
+# The base64-encoded server password to use.
+pass: c2VzYW1l
+nicks:
+  # The list of nicknames to try.
+  nicks:
+  - Bot
+  # Whether to skip the first nickname when trying nicknames.
+  # This means that the first nickname will only be used for fallback generation.
+  skip_first: true
+  # Options for fallback nickname generation.
+  gen:
+    # The 32-bit seed, or null to generate one randomly.
+    seed: null
+    # The pseudorandom elements to append onto the nickname.
+    suffixes:
+    # One decimal digit.
+    - Base10
+    # One octal digit.
+    - Base8
+    # One of the included elements.
+    - !Choice
+      - foo
+      - bar
+      - baz
+    # A lowercase ASCII letter (true for uppercase).
+    - !Letter false
+username: human
+realname: 100% Real Person
+sasl:
+- !Plain
+  # Leave blank in most cases.
+  authzid: ''
+  # The account to log into.
+  authcid: guest1
+  # The base64-encoded password.
+  passwd: aHVudGVyMg==
+# Whether to continue the connection if SASL fails.
+allow_sasl_fail: false
