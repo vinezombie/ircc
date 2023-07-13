@@ -11,8 +11,8 @@ nicks:
   skip_first: true
   # Options for fallback nickname generation.
   gen:
-    # The 32-bit seed, or null to generate one randomly.
-    seed: null
+    # Use RNG using the provided 32-bit seed, or null to generate one randomly.
+    strategy: !Rng null
     # The pseudorandom elements to append onto the nickname.
     suffixes:
     # One decimal digit.

@@ -2,7 +2,7 @@ use std::path::PathBuf;
 use vinezombie::client::{
     auth::{AnySasl, Clear},
     conn::ServerAddr,
-    nick::SuffixRandom,
+    nick::Suffix,
     register::{self, BotDefaults},
     tls::{TlsConfig, Trust},
     Queue,
@@ -35,7 +35,7 @@ pub struct Args {
     pub address: String,
 }
 
-type Register = register::Register<Clear, AnySasl<Clear>, SuffixRandom>;
+type Register = register::Register<Clear, AnySasl<Clear>, Suffix>;
 
 fn parse_register(path: PathBuf) -> std::io::Result<Register> {
     let read = std::fs::File::open(path)?;
@@ -105,7 +105,9 @@ async fn main_async(
                     read_stdin = false;
                     continue;
                 };
-                line.pop();
+                while line.ends_with(char::is_whitespace) {
+                    line.pop();
+                }
                 if line.is_empty() {
                     continue;
                 }
