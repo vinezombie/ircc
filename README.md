@@ -15,6 +15,7 @@ automating away some of the tedium.
 
 ## Features
 
+- `rustyline`-flavored line editing and history.
 - Automatic ping replies.
 - TLS support, including client certificates.
 - Automatic connection registration, including SASL PLAIN and EXTERNAL.
