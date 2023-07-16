@@ -6,19 +6,18 @@ nicks:
   # The list of nicknames to try.
   nicks:
   - Bot
+  - IUseIRCC
   # Whether to skip the first nickname when trying nicknames.
-  # This means that the first nickname will only be used for fallback generation.
+  # This means that the first nick will only be used for fallback generation.
   skip_first: true
   # Options for fallback nickname generation.
   gen:
-    # Use RNG using the provided 32-bit seed, or null to generate one randomly.
-    strategy: !Rng null
-    # The pseudorandom elements to append onto the nickname.
+    # The elements to append onto the nickname.
     suffixes:
-    # One decimal digit.
-    - Base10
-    # One octal digit.
-    - Base8
+    # One underscore.
+    - !Char '_'
+    # One non-zero decimal digit.
+    - !NonZeroBase10
     # One of the included elements.
     - !Choice
       - foo
@@ -26,9 +25,18 @@ nicks:
       - baz
     # A lowercase ASCII letter (true for uppercase).
     - !Letter false
+    # How the elements to append and their values should be selected.
+    # !Rng uses random values for all of them with the optional 32-bit seed.
+    # !Seq chooses the elements and values sequentially.
+    strategy: !Rng null
 username: human
 realname: 100% Real Person
+# SASL authentication settings. Each of these will be tried in order.
 sasl:
+  # For use with CertFP.
+- !External
+  # The standard username+password login method.
+  # Be sure to use a secure connection when you use this.
 - !Plain
   # Leave blank in most cases.
   authzid: ''
@@ -36,5 +44,5 @@ sasl:
   authcid: guest1
   # The base64-encoded password.
   passwd: aHVudGVyMg==
-# Whether to continue the connection if SASL fails.
+# Whether to continue the connection if every attempt at SASL auth fails.
 allow_sasl_fail: false
