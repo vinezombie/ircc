@@ -880,7 +880,7 @@ checksum = "830b7e5d4d90034032940e4ace0d9a9a057e7a45cd94e6c007832e39edb82f6d"
 [[package]]
 name = "vinezombie"
 version = "0.1.0"
-source = "git+https://github.com/vinezombie/vinezombie?rev=f3cabd54097e86aff8700e744d88bd8c2d4c76a7#f3cabd54097e86aff8700e744d88bd8c2d4c76a7"
+source = "git+https://github.com/vinezombie/vinezombie?rev=06af0944e9c2fc56495e56e829b9160c9aa16c16#06af0944e9c2fc56495e56e829b9160c9aa16c16"
 dependencies = [
  "base64",
  "rustls",

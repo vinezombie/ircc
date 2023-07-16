@@ -26,6 +26,6 @@ tracing-subscriber = { version = "0.3.17" }
 
 [dependencies.vinezombie]
 git = "https://github.com/vinezombie/vinezombie"
-rev = "f3cabd54097e86aff8700e744d88bd8c2d4c76a7"
+rev = "06af0944e9c2fc56495e56e829b9160c9aa16c16"
 version = "0.1.0"
 features = ["serde", "tracing"]
