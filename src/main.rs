@@ -1,17 +1,15 @@
 mod args;
 mod run;
 
+use rustyline::error::ReadlineError;
 use std::path::PathBuf;
 use vinezombie::client::{
     auth::{AnySasl, Clear},
-    conn::ServerAddr,
     nick::Suffix,
-    register::{self, BotDefaults},
     tls::{TlsConfig, Trust},
-    Queue,
 };
 
-type Register = register::Register<Clear, AnySasl<Clear>, Suffix>;
+type Register = vinezombie::client::register::Register<Clear, AnySasl<Clear>, Suffix>;
 
 fn parse_register(path: PathBuf) -> std::io::Result<Register> {
     let read = std::fs::File::open(path)?;
@@ -47,19 +45,30 @@ pub fn main_fal(args: args::Args) -> Result<(), String> {
     };
     let mut readline =
         rustyline::DefaultEditor::new().map_err(|e| format!("cannot init rustyline: {e}"))?;
+    if let Some(history) = &args.history {
+        if let Err(e) = readline.load_history(history) {
+            tracing::info!("did not load history: {e}");
+        }
+    }
     let (send, recv) = tokio::sync::mpsc::unbounded_channel();
     let thread = run::run(recv, sa, tls, cfg, args.strict);
     loop {
         match readline.readline("") {
             Ok(line) => {
                 let _ = readline.add_history_entry(line.as_str());
-                if let Err(_) = send.send(line) {
+                if send.send(line).is_err() {
                     break;
                 }
             }
+            Err(ReadlineError::WindowResized) => (),
             Err(_) => {
                 break;
             }
+        }
+    }
+    if let Some(history) = &args.history {
+        if let Err(e) = readline.append_history(history) {
+            tracing::warn!("did not save history: {e}");
         }
     }
     std::mem::drop(send);

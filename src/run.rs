@@ -1,6 +1,9 @@
 use crate::Register;
 use std::thread::JoinHandle;
-use vinezombie::{client::{conn::ServerAddr, register::BotDefaults, tls::TlsConfig, Queue}, ircmsg::Numeric};
+use vinezombie::{
+    client::{conn::ServerAddr, register::BotDefaults, tls::TlsConfig, Queue},
+    ircmsg::Numeric,
+};
 
 pub fn run(
     stdin: tokio::sync::mpsc::UnboundedReceiver<String>,
@@ -34,9 +37,8 @@ async fn main_async(
     if let Some(cfg) = &cfg {
         tracing::info!("registering connection");
         let mut handler = cfg.handler(&BotDefaults, &mut queue)?;
-        let reg = vinezombie::client::run_handler_tokio(
-            &mut conn, &mut queue, &mut handler
-        ).await?;
+        let reg =
+            vinezombie::client::run_handler_tokio(&mut conn, &mut queue, &mut handler).await?;
         let welcome = ServerMsg {
             tags: Default::default(),
             source: reg.source,

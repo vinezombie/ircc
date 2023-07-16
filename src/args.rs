@@ -20,6 +20,9 @@ pub struct Args {
     /// The port number to use
     #[clap(short = 'p', long)]
     pub port: Option<u16>,
+    /// The file to use for command history
+    #[clap(short = 'H', long)]
+    pub history: Option<PathBuf>,
     /// Log messages at the debug level
     #[clap(short = 'v')]
     pub verbose: bool,
