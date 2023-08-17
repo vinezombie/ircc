@@ -23,7 +23,7 @@ automating away some of the tedium.
 ## Basic Usage
 
 ```sh
-ircc [-R path/to/register.yml] [--tls] <server>
+ircc [--tls] <server> raw [path/to/register.yml]
 ```
 
 For detailed usage, run `ircc --help`.

@@ -67,6 +67,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "anyhow"
+version = "1.0.72"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3b13c32d80ecc7ab747b80c3784bce54ee8a7a0cc4fbda9bf4cda2cf6fe90854"
+
+[[package]]
 name = "autocfg"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -304,10 +310,12 @@ dependencies = [
 name = "ircc"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
  "clap",
  "rustyline",
  "serde",
  "serde_yaml",
+ "thiserror",
  "tokio",
  "tracing",
  "tracing-subscriber",
@@ -730,6 +738,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "thiserror"
+version = "1.0.43"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a35fc5b8971143ca348fa6df4f024d4d55264f3468c71ad1c2f365b0a4d58c42"
+dependencies = [
+ "thiserror-impl",
+]
+
+[[package]]
+name = "thiserror-impl"
+version = "1.0.43"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "463fe12d7993d3b327787537ce8dd4dfa058de32fc2b195ef3cde03dc4771e8f"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "thread_local"
 version = "1.1.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -880,7 +908,8 @@ checksum = "830b7e5d4d90034032940e4ace0d9a9a057e7a45cd94e6c007832e39edb82f6d"
 [[package]]
 name = "vinezombie"
 version = "0.1.0"
-source = "git+https://github.com/vinezombie/vinezombie?rev=06af0944e9c2fc56495e56e829b9160c9aa16c16#06af0944e9c2fc56495e56e829b9160c9aa16c16"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "606473a305bc74a6a8b31ac041977e6c3d20961d296361b62def928b30aeef51"
 dependencies = [
  "base64",
  "rustls",
